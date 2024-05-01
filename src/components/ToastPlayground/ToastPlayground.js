@@ -4,6 +4,7 @@ import Button from "../Button";
 
 import styles from "./ToastPlayground.module.css";
 import Toast from "../Toast/Toast";
+import ToastShelf from "../ToastShelf/ToastShelf";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 
@@ -11,6 +12,32 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState();
   const [showToast, setShowToast] = React.useState(false);
+
+  const [toasts, setToasts] = React.useState([
+    {
+      message: "This is a test",
+      variant: "error",
+    },
+    {
+      message: "This is another test",
+      variant: "warning",
+    },
+    {
+      message: "Sup Bitches",
+      variant: "success",
+    },
+  ]);
+
+  //TEST
+  //const dismiss = useHandleDismiss(1, toasts, setToasts);
+
+  function useHandleDismiss(selectedItem, currentState, setCurrentState) {
+    //const stateNew = [...currentState];
+    const stateNew = currentState.toSpliced(selectedItem, 1);
+    console.log(stateNew);
+
+    setCurrentState(stateNew);
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -20,11 +47,17 @@ function ToastPlayground() {
       </header>
 
       {/* TOAST */}
-      {showToast && (
+      {/* {showToast && (
         <Toast icon={variant} handleDismiss={setShowToast}>
           {message}
         </Toast>
-      )}
+      )} */}
+
+      <ToastShelf
+        toastItems={toasts}
+        setToastItems={setToasts}
+        removeItem={useHandleDismiss}
+      />
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -74,7 +107,18 @@ function ToastPlayground() {
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
             <Button
               disabled={!message && true}
-              onClick={(event) => setShowToast(true)}
+              // onClick={(event) => setShowToast(true)}
+              onClick={(event) => {
+                const updateToasts = [
+                  ...toasts,
+                  {
+                    message,
+                    variant,
+                  },
+                ];
+
+                setToasts(updateToasts);
+              }}
             >
               Pop Toast!
             </Button>
