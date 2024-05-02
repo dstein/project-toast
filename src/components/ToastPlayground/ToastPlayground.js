@@ -23,7 +23,7 @@ function ToastPlayground() {
       variant: "warning",
     },
     {
-      message: "Sup Bitches",
+      message: "Hello there",
       variant: "success",
     },
   ]);
@@ -31,13 +31,23 @@ function ToastPlayground() {
   //TEST
   //const dismiss = useHandleDismiss(1, toasts, setToasts);
 
-  function useHandleDismiss(selectedItem, currentState, setCurrentState) {
-    //const stateNew = [...currentState];
-    const stateNew = currentState.toSpliced(selectedItem, 1);
-    console.log(stateNew);
+  // function useHandleDismiss(selectedItem, currentState, setCurrentState) {
+  //   //const stateNew = [...currentState];
+  //   const stateNew = currentState.toSpliced(selectedItem, 1);
+  //   console.log(stateNew);
 
-    setCurrentState(stateNew);
-  }
+  //   setCurrentState(stateNew);
+  // }
+
+  const dismiss = React.useCallback(
+    (selectedItem, currentState, setCurrentState) => {
+      const stateNew = currentState.toSpliced(selectedItem, 1);
+      console.log(stateNew);
+
+      setCurrentState(stateNew);
+    },
+    []
+  );
 
   return (
     <div className={styles.wrapper}>
@@ -56,7 +66,7 @@ function ToastPlayground() {
       <ToastShelf
         toastItems={toasts}
         setToastItems={setToasts}
-        removeItem={useHandleDismiss}
+        removeItem={dismiss}
       />
 
       <div className={styles.controlsWrapper}>

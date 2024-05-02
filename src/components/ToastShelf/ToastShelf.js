@@ -7,6 +7,8 @@ function ToastShelf({ toastItems, setToastItems, removeItem }) {
   //console.log(toastItems);
   //console.log(removeItem);
 
+  console.log("yo");
+
   return (
     <>
       {/* <ol className={styles.wrapper}>
@@ -37,4 +39,4 @@ function ToastShelf({ toastItems, setToastItems, removeItem }) {
   );
 }
 
-export default ToastShelf;
+export default React.memo(ToastShelf);
