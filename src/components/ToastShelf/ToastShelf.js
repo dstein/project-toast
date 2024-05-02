@@ -21,9 +21,10 @@ function ToastShelf({ toastItems, setToastItems, removeItem }) {
       </ol> */}
 
       <ol className={styles.wrapper}>
-        {toastItems.map(({ message, variant }, index) => (
-          <li className={styles.toastWrapper}>
+        {toastItems.map(({ message, variant, id }, index) => (
+          <li key={id} className={styles.toastWrapper}>
             <Toast
+              keyId={id}
               icon={variant}
               toastIndex={index}
               toastItems={toastItems}
