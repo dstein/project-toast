@@ -21,14 +21,27 @@ function ToastProvider({ children }) {
     },
   ]);
 
-  const dismiss = React.useCallback(
-    (selectedItem, currentState, setCurrentState) => {
-      const stateNew = currentState.toSpliced(selectedItem, 1);
-      console.log(stateNew);
+  ///** ALTERNATE DISMISSAL METHOD */
 
-      setCurrentState(stateNew);
+  // const dismiss = React.useCallback(
+  //   (selectedItem, currentState, setCurrentState) => {
+  //     const stateNew = currentState.toSpliced(selectedItem, 1);
+  //     console.log(stateNew);
+
+  //     setCurrentState(stateNew);
+  //   },
+  //   []
+  // );
+
+  const dismiss = React.useCallback(
+    (id) => {
+      const nextToasts = toasts.filter((toast) => {
+        return toast.id !== id;
+      });
+
+      setToasts(nextToasts);
     },
-    []
+    [toasts]
   );
 
   return (

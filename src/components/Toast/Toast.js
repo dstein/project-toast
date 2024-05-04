@@ -20,7 +20,7 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast({ icon = "notice", children, toastIndex }) {
+function Toast({ icon = "notice", children, toastIndex, keyId }) {
   const IconComponent = ICONS_BY_VARIANT[icon];
 
   const { toasts, setToasts, dismiss } = React.useContext(ToastContext);
@@ -36,10 +36,7 @@ function Toast({ icon = "notice", children, toastIndex }) {
         <IconComponent size={24} />
       </div>
       <p className={styles.content}>{children}</p>
-      <button
-        className={styles.closeButton}
-        onClick={() => dismiss(toastIndex, toasts, setToasts)}
-      >
+      <button className={styles.closeButton} onClick={() => dismiss(keyId)}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
