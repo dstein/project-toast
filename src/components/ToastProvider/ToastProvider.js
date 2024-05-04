@@ -1,4 +1,5 @@
 import React from "react";
+import useKeyDown from "../../hooks/use-keydown";
 
 export const ToastContext = React.createContext();
 
@@ -57,19 +58,18 @@ function ToastProvider({ children }) {
     [toasts]
   );
 
-  React.useEffect(() => {
-    function handleKeyDown(event) {
-      if (event.code === "Escape") {
-        setToasts([]);
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+  //- Memoize the escape, pass it to the custom hook
+  //- Instead of making the hook static, only using escape, make it more
+  //generic to handle any type of key and pass what you want it to do as the callback
+  const handleEscape = React.useCallback(() => {
+    setToasts([]);
   }, []);
+
+  useKeyDown("Escape", handleEscape);
+
+  useKeyDown("Space", () => {
+    console.log("Space!");
+  });
 
   return (
     <ToastContext.Provider
