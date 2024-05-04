@@ -11,7 +11,7 @@ function ToastShelf() {
 
   return (
     <>
-      {/* <ol className={styles.wrapper}>
+      <ol className={styles.wrapper}>
         {toasts.map(({ message, variant, id }, index) => (
           <li key={id} className={styles.toastWrapper}>
             <Toast keyId={id} icon={variant} toastIndex={index}>
@@ -19,7 +19,7 @@ function ToastShelf() {
             </Toast>
           </li>
         ))}
-      </ol> */}
+      </ol>
     </>
   );
 }
