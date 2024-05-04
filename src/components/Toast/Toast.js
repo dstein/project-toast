@@ -25,7 +25,7 @@ function Toast({ icon = "notice", children, toastIndex }) {
 
   const { toasts, setToasts, dismiss } = React.useContext(ToastContext);
 
-  //console.log(removeItem);
+  console.log("hey");
 
   return (
     <div
@@ -35,13 +35,17 @@ function Toast({ icon = "notice", children, toastIndex }) {
       <div className={styles.iconContainer}>
         <IconComponent size={24} />
       </div>
-      <p className={styles.content}>{children}</p>
+      <p className={styles.content}>
+        <VisuallyHidden>{icon} -</VisuallyHidden>
+        {children}
+      </p>
       <button
         className={styles.closeButton}
+        aria-label="Dismiss message"
+        aria-live="off"
         onClick={() => dismiss(toastIndex, toasts, setToasts)}
       >
         <X size={24} />
-        <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
     </div>
   );
