@@ -23,7 +23,7 @@ const ICONS_BY_VARIANT = {
 function Toast({ icon = "notice", children, toastIndex, keyId }) {
   const IconComponent = ICONS_BY_VARIANT[icon];
 
-  const { toasts, setToasts, dismiss } = React.useContext(ToastContext);
+  const { dismiss } = React.useContext(ToastContext);
 
   //console.log(removeItem);
 

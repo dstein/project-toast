@@ -12,21 +12,12 @@ function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState();
 
-  const { toasts, setToasts } = React.useContext(ToastContext);
+  const { createToast } = React.useContext(ToastContext);
 
   function handleSubmit(event) {
     event.preventDefault();
 
-    const updateToasts = [
-      ...toasts,
-      {
-        message,
-        variant,
-        id: crypto.randomUUID(),
-      },
-    ];
-
-    setToasts(updateToasts);
+    createToast(message, variant);
   }
 
   return (

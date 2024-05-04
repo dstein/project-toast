@@ -21,6 +21,19 @@ function ToastProvider({ children }) {
     },
   ]);
 
+  function createToast(message, variant) {
+    const updateToasts = [
+      ...toasts,
+      {
+        message,
+        variant,
+        id: crypto.randomUUID(),
+      },
+    ];
+
+    setToasts(updateToasts);
+  }
+
   ///** ALTERNATE DISMISSAL METHOD */
 
   // const dismiss = React.useCallback(
@@ -49,6 +62,7 @@ function ToastProvider({ children }) {
       value={{
         toasts,
         setToasts,
+        createToast,
         dismiss,
       }}
     >
